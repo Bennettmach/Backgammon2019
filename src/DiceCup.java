@@ -29,6 +29,20 @@ public class DiceCup {
 	{
 		//--------------------
 		// TODO: insert your code here.
+		if (isDoubles())
+		{
+			availableMoves[0]=die1;
+			availableMoves[1]=die2;
+			availableMoves[2]=die2;
+			availableMoves[3]=die1;
+		}
+		if (die1 != die2)
+		{
+			availableMoves[0]=die1;
+			availableMoves[1]=die2;
+			availableMoves[2]=0;
+			availableMoves[3]=0;
+		}
 		
 		//--------------------
 	}
@@ -44,6 +58,8 @@ public class DiceCup {
 		// TODO: insert your code here.
 		// Hint: (int)(Math.random()*10) gives a random number from 0 to 9, inclusive.
 		// Hint: write calculateAvailableMoves() before you write this one.
+		die1=(int)(Math.random()*7+1);
+		die2=(int)(Math.random()*7+1);
 		//--------------------
 	}
 	/**
@@ -66,10 +82,22 @@ public class DiceCup {
 	 */
 	public String toString()
 	{
-		String result = "";
+		String result = "+-+ +-+\n|"+die1+"| |"+die2+"| ";
 		//--------------------
 		// TODO: insert your code here.
-		
+		if (isDoubles())
+		{
+			result = result + "Doubles";
+		}
+		result = result + "+-+ +-+";
+		if(isDoubles())
+		{
+			result = result + "Availible: "+availableMoves[0]+", "+availableMoves[1]+", "+availableMoves[2];
+		}
+		else
+		{
+			result=result+ "Availible: "+availableMoves[0]+", "+availableMoves[1];
+		}
 		//--------------------
 		return result;
 		
@@ -84,7 +112,10 @@ public class DiceCup {
 		boolean legal = false;
 		//--------------------
 		// TODO: insert your code here.
-		
+		if (amountToMove == die1 || amountToMove == die2)
+		{
+			legal = true;
+		}
 		//--------------------
 		return legal;
 	}
@@ -97,7 +128,10 @@ public class DiceCup {
 		boolean doubles = false;
 		//--------------------
 		// TODO: insert your code here.
-		
+		if (die1==die2)
+		{
+			doubles = true;
+		}
 		//--------------------
 		return doubles;
 	}
@@ -112,7 +146,13 @@ public class DiceCup {
 	{
 		//--------------------
 		// TODO: insert your code here.
-		
+		for (int i = 0;i<=3;i++)
+		{
+			if (availableMoves[i] == amountToMove)
+			{
+				availableMoves[i]=0;
+			}
+		}
 		//--------------------
 	
 	}
@@ -124,10 +164,16 @@ public class DiceCup {
 	 */
 	public boolean hasMovesLeft()
 	{
-		boolean hasMoves = true;
+		boolean hasMoves = false;
 		//--------------------
 		// TODO: insert your code here.
-		
+		for (int i = 0; i<=3; i++)
+		{
+			if (availableMoves[i]>=1)
+			{
+				hasMoves=true;
+			}
+		}
 		//--------------------
 		return hasMoves;
 	}
