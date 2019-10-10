@@ -169,7 +169,7 @@ public class DiceCup {
 		// TODO: insert your code here.
 		for (int i = 0; i<=3; i++)
 		{
-			if (availableMoves[i]>=1)
+			if (availableMoves[i]>0)
 			{
 				hasMoves=true;
 			}
