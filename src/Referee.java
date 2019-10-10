@@ -1,3 +1,4 @@
+import java.util.Scanner;
 /**
  * The Referee class keeps track of the board, any dice, and all interactions
  * with the players. It keeps track of whose turn it is, displays the board,
@@ -8,6 +9,7 @@ public class Referee {
 	// TODO: decide which private member variables the Referee should have and declare them here.
 	// suggestion: the dice are an array of integers, typically 1-6, where 0 means unrolled or 
 	// used up already.
+	private Scanner keyReader = new Scanner(System.in);
 	
 	
 	/**
@@ -23,6 +25,8 @@ public class Referee {
 	public void playGame()
 	{
 		// TODO: you write the Referee's playGame method.
-		System.out.println("Playing game."); // placeholder code.
+		System.out.println("Player 1 name:"); // placeholder code.
+		
+
 	}
 }

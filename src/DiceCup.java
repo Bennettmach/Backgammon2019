@@ -36,7 +36,7 @@ public class DiceCup {
 			availableMoves[2]=die2;
 			availableMoves[3]=die1;
 		}
-		if (die1 != die2)
+		else
 		{
 			availableMoves[0]=die1;
 			availableMoves[1]=die2;
