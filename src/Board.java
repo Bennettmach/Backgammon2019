@@ -28,8 +28,14 @@ public class Board {
 	public Board()
 	{
 		//--------------------
-		// TODO: insert your code here.
-
+		numberOfPieces[1] = 2;
+        numberOfPieces[6] = -5;
+        numberOfPieces[8] = -3;
+        numberOfPieces[12] = 5;
+        numberOfPieces[13] = -5;
+        numberOfPieces[17] = 3;
+        numberOfPieces[19] = 5;
+        numberOfPieces[24] = -2;
 		//--------------------
 	}
 
@@ -53,8 +59,29 @@ public class Board {
 	{
 		String result = "";
 		//--------------------
-		// TODO: insert your code here.
-
+		for (int i = 0; i < 26; i++)
+        {
+            System.out.print(i+" ");
+            if (i == 0 || i == 25)
+            {
+                System.out.print("(BAR) ");
+            }
+            if (numberOfPieces[i] > 0)
+            {
+                for (int j = 0; j < numberOfPieces[i]; j++)
+                {
+                    System.out.print("O");
+                }
+            }
+            else
+            {
+                for (int j = 0; j < numberOfPieces[i]; j++)
+                {
+                    System.out.print("X");
+                }
+            }
+            System.out.println();
+        }
 		//--------------------
 		return result;
 	}
@@ -174,11 +201,24 @@ public class Board {
 	 */
 	public boolean gameIsOver()
 	{
-		boolean gameOver = false;
-		//--------------------
-		// TODO: Insert your code here
+		boolean gameOver;
+		boolean p1HasPieces = false;
+		boolean p2HasPieces = false;
 
+		//--------------------
+		for (int i = 0; i < 26; i++)
+		{
+			if (numberOfPieces[i] > 0)
+				p1HasPieces=true;
+			if (numberOfPieces[i] < 0)
+				p2HasPieces=true;
+		}
+		if (p1HasPieces && p2HasPieces)
+			gameOver = false;
+		else
+			gameOver = true;
 		//--------------------
 		return gameOver;
 	}
+
 }
