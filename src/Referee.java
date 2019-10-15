@@ -10,7 +10,9 @@ public class Referee {
 	// suggestion: the dice are an array of integers, typically 1-6, where 0 means unrolled or 
 	// used up already.
 	private Scanner keyReader = new Scanner(System.in);
-	
+	private String p1name;
+	private String p2name;
+	private Board myBoard;
 	
 	/**
 	 * constructor - set up the board and players 
@@ -25,8 +27,13 @@ public class Referee {
 	public void playGame()
 	{
 		// TODO: you write the Referee's playGame method.
-		System.out.println("Player 1 name:"); // placeholder code.
-		
+		myBoard = new Board();
+		System.out.print("Player 1 name: ");
+		p1name = keyReader.nextLine();
+		System.out.print("Player 2 name: ");
+		p2name = keyReader.nextLine();
+		System.out.println(myBoard);
+
 
 	}
 }
