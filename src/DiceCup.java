@@ -201,4 +201,18 @@ public class DiceCup {
 	{
 		return availableMoves;
 	}
+
+	public void options()
+	{
+		System.out.print("Do you want to move ");
+		for (int i = 0; i<4; i++)
+		{
+			if (availableMoves[i]>0)
+			{
+				System.out.print(availableMoves[i]+" ");
+			}
+		}
+		System.out.println("");
+	}
 }
+

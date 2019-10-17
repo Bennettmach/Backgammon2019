@@ -61,11 +61,11 @@ public class Board {
 		//--------------------
 		for (int i = 0; i < 26; i++)
         {
-        	result = result + i+" ";
-        	if (i==0 || i==25)
-			{
-				result = result + "(BAR) ";
-			}
+            result = result + i+" ";
+            if (i == 0 || i == 25)
+            {
+                result = result + "(BAR) ";
+            }
             if (numberOfPieces[i] > 0)
             {
                 for (int j = 0; j < numberOfPieces[i]; j++)
@@ -73,7 +73,7 @@ public class Board {
                     result = result + "O";
                 }
             }
-            if (numberOfPieces[i] < 0)
+			if (numberOfPieces[i] < 0)
             {
                 for (int j = 0; j > numberOfPieces[i]; j--)
                 {
