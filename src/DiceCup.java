@@ -5,14 +5,13 @@
  */
 public class DiceCup {
 	private int die1, die2;
-	private int[] availableMoves; // this will be four numbers, though positions 
+	private int[] availableMoves = new int[4]; // this will be four numbers, though positions
 								 //     2 and 3 will often be zero.
 	
 	public DiceCup()
 	{
 		//--------------------
 		// TODO: insert your code here.
-		
 		//--------------------
 	}
 	/**
@@ -43,7 +42,7 @@ public class DiceCup {
 			availableMoves[2]=0;
 			availableMoves[3]=0;
 		}
-		
+
 		//--------------------
 	}
 	/**
@@ -60,6 +59,7 @@ public class DiceCup {
 		// Hint: write calculateAvailableMoves() before you write this one.
 		die1=(int)(Math.random()*7+1);
 		die2=(int)(Math.random()*7+1);
+		calculateAvailableMoves();
 		//--------------------
 	}
 	/**
@@ -82,17 +82,17 @@ public class DiceCup {
 	 */
 	public String toString()
 	{
-		String result = "+-+ +-+\n|"+die1+"| |"+die2+"| ";
+		String result = "+-+ +-+\n|"+die1+"| |"+die2+"| \n";
 		//--------------------
 		// TODO: insert your code here.
+		result = result + "+-+ +-+\n";
 		if (isDoubles())
 		{
-			result = result + "Doubles";
+			result = result + "Doubles \n";
 		}
-		result = result + "+-+ +-+";
 		if(isDoubles())
 		{
-			result = result + "Availible: "+availableMoves[0]+", "+availableMoves[1]+", "+availableMoves[2];
+			result = result + "Availible: "+availableMoves[0]+", "+availableMoves[1]+", "+availableMoves[2]+ ", "+availableMoves[3];
 		}
 		else
 		{

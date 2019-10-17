@@ -6,7 +6,7 @@
 public class Board {
 
 	// TODO: decide which private member variables the Board class needs, and declare them here.
-	private int[] numberOfPieces =  new int[25];
+	private int[] numberOfPieces =  new int[26];
 
 	// suggestion - for the 24 spaces, I suggest an array that holds the number
 	// of pieces on each square. One player will have positive numbers, and
@@ -61,26 +61,26 @@ public class Board {
 		//--------------------
 		for (int i = 0; i < 26; i++)
         {
-            System.out.print(i+" ");
-            if (i == 0 || i == 25)
-            {
-                System.out.print("(BAR) ");
-            }
+        	result = result + i+" ";
+        	if (i==0 || i==25)
+			{
+				result = result + "(BAR) ";
+			}
             if (numberOfPieces[i] > 0)
             {
                 for (int j = 0; j < numberOfPieces[i]; j++)
                 {
-                    System.out.print("O");
+                    result = result + "O";
                 }
             }
-            else
+            if (numberOfPieces[i] < 0)
             {
-                for (int j = 0; j < numberOfPieces[i]; j++)
+                for (int j = 0; j > numberOfPieces[i]; j--)
                 {
-                    System.out.print("X");
+                    result = result + "X";
                 }
             }
-            System.out.println();
+            result = result + "\n";
         }
 		//--------------------
 		return result;

@@ -13,6 +13,7 @@ public class Referee {
 	private String p1name;
 	private String p2name;
 	private Board myBoard;
+	private DiceCup dCup;
 	
 	/**
 	 * constructor - set up the board and players 
@@ -28,11 +29,16 @@ public class Referee {
 	{
 		// TODO: you write the Referee's playGame method.
 		myBoard = new Board();
+		dCup = new DiceCup();
 		System.out.print("Player 1 name: ");
 		p1name = keyReader.nextLine();
 		System.out.print("Player 2 name: ");
 		p2name = keyReader.nextLine();
+		System.out.println(p1name+" is rolling...");
 		System.out.println(myBoard);
+		dCup.roll();
+		System.out.println(dCup);
+
 
 
 	}
