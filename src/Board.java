@@ -132,14 +132,14 @@ public class Board {
 		//--------------------
 		if (numberOfPieces[startingSpace] > 0)
 		{
-			if ((numberOfPieces[startingSpace+numSpaces] > 0) || (numberOfPieces[startingSpace+numSpaces] == -1))
+			if ((numberOfPieces[startingSpace+numSpaces] >= 0) || (numberOfPieces[startingSpace+numSpaces] == -1))
 			{
 				legal = true;
 			}
 		}
 		if (numberOfPieces[startingSpace] < 0)
 		{
-			if ((numberOfPieces[startingSpace-numSpaces] < 0) || (numberOfPieces[startingSpace-numSpaces] == 1))
+			if ((numberOfPieces[startingSpace-numSpaces] <= 0) || (numberOfPieces[startingSpace-numSpaces] == 1))
 			{
 				legal = true;
 			}
