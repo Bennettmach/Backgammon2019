@@ -57,8 +57,8 @@ public class DiceCup {
 		// TODO: insert your code here.
 		// Hint: (int)(Math.random()*10) gives a random number from 0 to 9, inclusive.
 		// Hint: write calculateAvailableMoves() before you write this one.
-		die1=(int)(Math.random()*7+1);
-		die2=(int)(Math.random()*7+1);
+		die1=(int)(Math.random()*6+1);
+		die2=(int)(Math.random()*6+1);
 		calculateAvailableMoves();
 		//--------------------
 	}
@@ -172,6 +172,7 @@ public class DiceCup {
 			if (availableMoves[i]>0)
 			{
 				hasMoves=true;
+				break;
 			}
 		}
 		//--------------------

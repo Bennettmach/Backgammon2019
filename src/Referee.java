@@ -34,91 +34,120 @@ public class Referee {
 	 */
 	public void playGame() {
 		// TODO: you write the Referee's playGame method.
+		// starting turn
 		myBoard = new Board();
 		dCup = new DiceCup();
-		System.out.println("Player 1 is: O Player 2 is: X");
 		System.out.print("Player 1 name: ");
 		p1name = keyReader.nextLine();
 		System.out.print("Player 2 name: ");
 		p2name = keyReader.nextLine();
-
+		//start game
 		while (gameIsStillPlaying) {
 			p1Turn = true;
+			// player 1 turn
 			while (p1Turn) {
+				// if first turn then roll dice an print board
 				if (p1FirstTurn) {
 					System.out.println(p1name + " is rolling...");
 					System.out.println(myBoard);
 					dCup.roll();
 					System.out.println(dCup);
+					System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
 					p1FirstTurn = false;
+					p2FirstTurn = true;
 				}
-				System.out.println("From which row would you like to move a piece?");
+				// ask if p1 wants to move piece
+				System.out.println(p1name+", From which row would you like to move a piece?");
 				p1row = keyReader.nextInt();
+				// if invalid choice
 				while (!myBoard.playerHasPieceAtLocation(1, p1row)) {
 					System.out.println("Please enter a valid number");
-					System.out.println("From which row would you like to move a piece?");
+					System.out.println(p1name+", From which row would you like to move a piece?");
 					p1row = keyReader.nextInt();
 				}
+				// if valid choice
 				if (myBoard.playerHasPieceAtLocation(1, p1row)) {
+					// if hasMovesLeft = 0
 					if (!p1Turn)
 						break;
+					// if hasMovesLeft > 0
 					while (dCup.hasMovesLeft()) {
+						// print moves and ask which move
 						dCup.options();
 						int choice = keyReader.nextInt();
-						if (dCup.isLegal(choice)) {
-							if (myBoard.isLegal(p1row, choice)) {
+						// if move can be made
+						if (dCup.isLegal(choice))
+						{
+							// if move can be made
+							if (myBoard.isLegal(p1row, choice))
+							{
+								// if no moves left
+								if (!dCup.hasMovesLeft())
+								{
+									p2Turn = true;
+									p1Turn = false;
+									break;
+								}
 								dCup.moveMade(choice);
 								myBoard.makeMove(p1row, choice);
 								System.out.println(myBoard);
 								System.out.println(dCup);
-								if (!dCup.hasMovesLeft()) {
-									p2Turn = true;
-									p1Turn = false;
-								}
-								break;
+								System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
 							}
 						}
 					}
 				}
 			}
-			p2FirstTurn = true;
+			// p2 turn
 			while (p2Turn) {
+				// if p2 first turn roll dice
 				if (p2FirstTurn) {
 					System.out.println(p2name + " is rolling...");
 					System.out.println(myBoard);
 					dCup.roll();
 					System.out.println(dCup);
+					System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
 					p2FirstTurn = false;
+					p1FirstTurn = true;
 				}
-				System.out.println("From which row would you like to move a piece?");
+				// ask if p2 wants to move a piece
+				System.out.println(p2name+", From which row would you like to move a piece?");
 				p2row = keyReader.nextInt();
+				// if invalid choice
 				while (!myBoard.playerHasPieceAtLocation(-1, p2row)) {
 					System.out.println("Please enter a valid number");
-					System.out.println("From which row would you like to move a piece?");
+					System.out.println(p2name+", From which row would you like to move a piece?");
 					p2row = keyReader.nextInt();
 				}
+				//if valid choice
 				if (myBoard.playerHasPieceAtLocation(-1, p2row)) {
+					// if hasMovesLeft = 0
 					if (!p2Turn)
 						break;
+					// if hasMovesLeft > 0
 					while (dCup.hasMovesLeft()) {
 						dCup.options();
 						int choice = keyReader.nextInt();
+						// print moves and ask which move
 						if (dCup.isLegal(choice)) {
-							if (myBoard.isLegal(p2row, choice)) {
+							if (myBoard.isLegal(p2row, choice))
+							{
+								if (!dCup.hasMovesLeft())
+								{
+									p1Turn = true;
+									p2Turn = false;
+									break;
+								}
 								dCup.moveMade(choice);
 								myBoard.makeMove(p2row, choice);
 								System.out.println(myBoard);
 								System.out.println(dCup);
-								if (!dCup.hasMovesLeft()) {
-									p1Turn = true;
-									p2Turn = false;
-								}
-								break;
+								System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
+								// if no moves left
 							}
 						}
 					}
 				}
-
 			}
 		}
 	}
