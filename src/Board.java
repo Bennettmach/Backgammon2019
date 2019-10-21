@@ -132,6 +132,20 @@ public class Board {
 		//--------------------
 		if (numberOfPieces[startingSpace] > 0)
 		{
+			if (startingSpace+numSpaces >= 25)
+			{
+				for (int i = 0; i < 19; i++)
+				{
+					if (numberOfPieces[i] > 0)
+					{
+						return false;
+					}
+					else
+					{
+						legal = true;
+					}
+				}
+			}
 			if ((numberOfPieces[startingSpace+numSpaces] >= 0) || (numberOfPieces[startingSpace+numSpaces] == -1))
 			{
 				legal = true;
@@ -139,6 +153,20 @@ public class Board {
 		}
 		if (numberOfPieces[startingSpace] < 0)
 		{
+			if (startingSpace+numSpaces <= 0)
+			{
+				for (int i = 24; i > 6; i--)
+				{
+					if (numberOfPieces[i] < 0)
+					{
+						return false;
+					}
+					else
+					{
+						legal = true;
+					}
+				}
+			}
 			if ((numberOfPieces[startingSpace-numSpaces] <= 0) || (numberOfPieces[startingSpace-numSpaces] == 1))
 			{
 				legal = true;
@@ -162,32 +190,46 @@ public class Board {
 		//--------------------
 		if (numberOfPieces[startingSpace] > 0)
 		{
-			if (numberOfPieces[startingSpace+numSpacesToMove] == -1)
+			if (startingSpace+numSpacesToMove >= 25)
 			{
-				numberOfPieces[startingSpace+numSpacesToMove] += 1;
-				numberOfPieces[25] -= 1;
 				numberOfPieces[startingSpace] -= 1;
-				numberOfPieces[startingSpace+numSpacesToMove] += 1;
 			}
 			else
 			{
-				numberOfPieces[startingSpace] -= 1;
-				numberOfPieces[startingSpace+numSpacesToMove] += 1;
+				if (numberOfPieces[startingSpace+numSpacesToMove] == -1)
+				{
+					numberOfPieces[startingSpace+numSpacesToMove] += 1;
+					numberOfPieces[25] -= 1;
+					numberOfPieces[startingSpace] -= 1;
+					numberOfPieces[startingSpace+numSpacesToMove] += 1;
+				}
+				else
+				{
+					numberOfPieces[startingSpace] -= 1;
+					numberOfPieces[startingSpace+numSpacesToMove] += 1;
+				}
 			}
 		}
 		if (numberOfPieces[startingSpace] < 0)
 		{
-			if (numberOfPieces[startingSpace+numSpacesToMove] == 1)
+			if (startingSpace-numSpacesToMove <= 0)
 			{
-				numberOfPieces[startingSpace-numSpacesToMove] -= 1;
-				numberOfPieces[0] += 1;
 				numberOfPieces[startingSpace] += 1;
-				numberOfPieces[startingSpace-numSpacesToMove] -= 1;
 			}
 			else
 			{
-				numberOfPieces[startingSpace] += 1;
-				numberOfPieces[startingSpace-numSpacesToMove] -= 1;
+				if (numberOfPieces[startingSpace-numSpacesToMove] == 1)
+				{
+					numberOfPieces[startingSpace-numSpacesToMove] -= 1;
+					numberOfPieces[0] += 1;
+					numberOfPieces[startingSpace] += 1;
+					numberOfPieces[startingSpace-numSpacesToMove] -= 1;
+				}
+				else
+				{
+					numberOfPieces[startingSpace] += 1;
+					numberOfPieces[startingSpace-numSpacesToMove] -= 1;
+				}
 			}
 		}
 		//--------------------
