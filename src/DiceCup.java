@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * The dice cup is a class that takes care of rolling two dice, determining whether 
  * doubles were rolled, and keeping track of which moving numbers have been used.
@@ -61,6 +64,15 @@ public class DiceCup {
 		die2=(int)(Math.random()*6+1);
 		calculateAvailableMoves();
 		//--------------------
+	}
+	public int[] getDie()
+	{
+		int [] die = availableMoves;
+		for (int i = 0; i < availableMoves.length; i++)
+		{
+			die[i] = availableMoves[i];
+		}
+		return die;
 	}
 	/**
 	 * returns a string describing the dice, the available (non-zero) moves and whether this 
@@ -151,6 +163,7 @@ public class DiceCup {
 			if (availableMoves[i] == amountToMove)
 			{
 				availableMoves[i]=0;
+				break;
 			}
 		}
 		//--------------------
@@ -167,7 +180,7 @@ public class DiceCup {
 		boolean hasMoves = false;
 		//--------------------
 		// TODO: insert your code here.
-		for (int i = 0; i<=3; i++)
+		for (int i = 0; i<availableMoves.length; i++)
 		{
 			if (availableMoves[i]>0)
 			{
@@ -216,4 +229,3 @@ public class DiceCup {
 		System.out.println("");
 	}
 }
-

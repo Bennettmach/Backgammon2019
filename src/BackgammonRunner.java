@@ -21,5 +21,4 @@ public class BackgammonRunner {
 //			System.out.println("End game");
 //		}
 	}
-
 }

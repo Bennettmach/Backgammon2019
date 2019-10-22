@@ -234,8 +234,51 @@ public class Board {
 		}
 		//--------------------
 	}
+	public boolean p1CanMoveOffBoard(int row, int move)
+	{
+		boolean yes = true;
+		if (row - move < 1)
+			for (int i = 6;i<numberOfPieces.length;i++)
+				if (numberOfPieces[i] > 0)
+				{
+					yes = false;
+				}
+		return yes;
+	}
 
+	public boolean p2CanMoveOffBoard(int row, int move)
+	{
+		boolean yes = true;
+		if (row + move >24)
+			for (int i = 18;i>0;i--)
+				if (numberOfPieces[i] < 0)
+				{
+					yes = false;
+				}
+		return yes;
+	}
 
+	public boolean p1canMove(int location, DiceCup dc)
+	{
+		boolean p1canMove = true;
+		for (int i = 0; i <= 3; i++)
+			if (numberOfPieces[location + dc.getDie()[i]] < 0)
+			{
+				p1canMove = false;
+			}
+		return p1canMove;
+	}
+
+	public boolean p2canMove(int location, DiceCup dc)
+	{
+		boolean p2canMove = true;
+		for (int i = 0; i <= 3; i++)
+			if (numberOfPieces[location - dc.getDie()[i]] > 0)
+			{
+				p2canMove = false;
+			}
+		return p2canMove;
+	}
 	/**
 	 * gameIsOver - determines whether either player has removed all
 	 * his/her pieces from the board.
@@ -262,5 +305,4 @@ public class Board {
 		//--------------------
 		return gameOver;
 	}
-
 }
