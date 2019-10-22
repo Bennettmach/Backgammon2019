@@ -104,11 +104,11 @@ public class DiceCup {
 		}
 		if(isDoubles())
 		{
-			result = result + "Availible: "+availableMoves[0]+", "+availableMoves[1]+", "+availableMoves[2]+ ", "+availableMoves[3];
+			result = result + "Available Moves: "+availableMoves[0]+", "+availableMoves[1]+", "+availableMoves[2]+ ", "+availableMoves[3];
 		}
 		else
 		{
-			result=result+ "Availible: "+availableMoves[0]+", "+availableMoves[1];
+			result=result+ "Available Moves: "+availableMoves[0]+", "+availableMoves[1];
 		}
 		//--------------------
 		return result;
@@ -124,9 +124,15 @@ public class DiceCup {
 		boolean legal = false;
 		//--------------------
 		// TODO: insert your code here.
-		if (amountToMove == die1 || amountToMove == die2)
+		for (int i = 0;i < availableMoves.length;i++)
 		{
-			legal = true;
+			if (amountToMove == availableMoves[i])
+			{
+				if (amountToMove == 0)
+					return legal;
+				else
+					legal = true;
+			}
 		}
 		//--------------------
 		return legal;

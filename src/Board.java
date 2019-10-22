@@ -62,10 +62,14 @@ public class Board {
 		for (int i = 0; i < 26; i++)
         {
             result = result + i+" ";
-            if (i == 0 || i == 25)
+            if (i == 25)
             {
-                result = result + "(BAR) ";
+                result = result + "(P1 BAR) ";
             }
+			if (i == 0)
+			{
+				result = result + "(P2 BAR) ";
+			}
             if (numberOfPieces[i] > 0)
             {
                 for (int j = 0; j < numberOfPieces[i]; j++)
@@ -153,7 +157,7 @@ public class Board {
 		}
 		if (numberOfPieces[startingSpace] < 0)
 		{
-			if (startingSpace+numSpaces <= 0)
+			if (startingSpace-numSpaces <= 0)
 			{
 				for (int i = 24; i > 6; i--)
 				{
@@ -237,7 +241,7 @@ public class Board {
 	public boolean p1CanMoveOffBoard(int row, int move)
 	{
 		boolean yes = true;
-		if (row - move < 1)
+		if (row + move < 1)
 			for (int i = 6;i<numberOfPieces.length;i++)
 				if (numberOfPieces[i] > 0)
 				{
@@ -249,7 +253,7 @@ public class Board {
 	public boolean p2CanMoveOffBoard(int row, int move)
 	{
 		boolean yes = true;
-		if (row + move >24)
+		if (row - move >24)
 			for (int i = 18;i>0;i--)
 				if (numberOfPieces[i] < 0)
 				{
@@ -261,22 +265,56 @@ public class Board {
 	public boolean p1canMove(int location, DiceCup dc)
 	{
 		boolean p1canMove = true;
-		for (int i = 0; i <= 3; i++)
-			if (numberOfPieces[location + dc.getDie()[i]] < 0)
+		int check;
+		int checkUp=0;
+		int checkDown=0;
+		for (int i = 0; i < 4; i++)
+		{
+			check = location + dc.getDie()[i];
+			if (i<3)
+				checkUp = location + dc.getDie()[i+1];
+			if (i>0)
 			{
-				p1canMove = false;
+				checkDown = location + dc.getDie()[i - 1];
+				if (checkDown < 0)
+					checkDown = 0;
 			}
+			if (check<0)
+				check = 0;
+			if (numberOfPieces[check] < -1)
+				if (numberOfPieces[checkUp] < -1 || numberOfPieces[checkDown] < -1)
+				{
+					p1canMove = false;
+				}
+		}
 		return p1canMove;
 	}
 
 	public boolean p2canMove(int location, DiceCup dc)
 	{
 		boolean p2canMove = true;
-		for (int i = 0; i <= 3; i++)
-			if (numberOfPieces[location - dc.getDie()[i]] > 0)
+		int check = 0;
+		int checkUp=0;
+		int checkDown=0;
+		for (int i = 0; i < 4; i++)
+		{
+			check = location - dc.getDie()[i];
+			if (i<3)
+				checkUp = location - dc.getDie()[i+1];
+			if (i>0)
 			{
-				p2canMove = false;
+				checkDown = location - dc.getDie()[i - 1];
+				if (checkDown < 0)
+					checkDown = 0;
 			}
+			if (check<0)
+				check = 0;
+			if (numberOfPieces[check] > 1)
+				if (numberOfPieces[checkUp] > 1 || numberOfPieces[checkDown] > 1)
+				{
+					p2canMove = false;
+				}
+		}
 		return p2canMove;
 	}
 	/**

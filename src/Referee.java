@@ -108,8 +108,16 @@ public class Referee {
 								dCup.moveMade(choice);
 								myBoard.makeMove(p1row, choice);
 								System.out.println(myBoard);
-								System.out.println(dCup);
-								System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
+								if (myBoard.gameIsOver())
+								{
+									System.out.println(p1name+" WINS!");
+									gameIsStillPlaying = false;
+								}
+								else
+								{
+									System.out.println(dCup);
+									System.out.println(p1name + " is: O's\t" + p2name + " is: X's");
+								}
 								break;
 							}
 						}
@@ -174,8 +182,16 @@ public class Referee {
 								dCup.moveMade(choice);
 								myBoard.makeMove(p2row, choice);
 								System.out.println(myBoard);
-								System.out.println(dCup);
-								System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
+								if (myBoard.gameIsOver())
+								{
+									System.out.println(p2name+" WINS!");
+									gameIsStillPlaying = false;
+								}
+								else
+									{
+									System.out.println(dCup);
+									System.out.println(p1name + " is: O's\t" + p2name + " is: X's");
+								}
 								break;
 							}
 						}
