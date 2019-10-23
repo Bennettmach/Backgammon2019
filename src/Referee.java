@@ -39,7 +39,9 @@ public class Referee {
 		dCup = new DiceCup();
 		System.out.println("Welcome to Backgammon!");
 		System.out.println("\t**RULES**");
-		System.out.println("1. Move your pieces to the end zone\n2. You must have all of your pieces within the closest six spots to your end to begin taking them off the board");
+		System.out.println("1. Move your pieces to your bar\n" +
+				"2. You must have all of your pieces within the closest six spots to your end to begin taking them off the board\n" +
+				"3. If you have one piece on a spot it can be taken which will move it back to the opposite bar");
 		System.out.print("Player 1 name: ");
 		p1name = keyReader.nextLine();
 		System.out.print("Player 2 name: ");
@@ -51,9 +53,9 @@ public class Referee {
 			while (p1Turn) {
 				// if first turn then roll dice an print board
 				if (p1FirstTurn) {
-					System.out.println(p1name + " is rolling...");
 					System.out.println(myBoard);
 					dCup.roll();
+					System.out.println(p1name + " is rolling...");
 					System.out.println(dCup);
 					System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
 					p1FirstTurn = false;
@@ -128,9 +130,9 @@ public class Referee {
 			while (p2Turn) {
 				// if p2 first turn roll dice
 				if (p2FirstTurn) {
-					System.out.println(p2name + " is rolling...");
 					System.out.println(myBoard);
 					dCup.roll();
+					System.out.println(p2name + " is rolling...");
 					System.out.println(dCup);
 					System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
 					p2FirstTurn = false;

@@ -222,6 +222,9 @@ public class DiceCup {
 		return availableMoves;
 	}
 
+	/**
+	 * prints out what the players moves are.
+	 */
 	public void options()
 	{
 		System.out.print("Do you want to move ");

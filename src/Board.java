@@ -238,6 +238,13 @@ public class Board {
 		}
 		//--------------------
 	}
+
+	/**
+	 * method added to make the game more like the real game where you have to have all 15 pieces in your score zone to take them off
+	 * @param row
+	 * @param move
+	 * @return if player 1 can move off the board
+	 */
 	public boolean p1CanMoveOffBoard(int row, int move)
 	{
 		boolean yes = true;
@@ -250,6 +257,12 @@ public class Board {
 		return yes;
 	}
 
+	/**
+	 * added to make the game more like the real game where you have to have all 15 pieces in your score zone to take them off
+	 * @param row
+	 * @param move
+	 * @return if player 2 can move off the board
+	 */
 	public boolean p2CanMoveOffBoard(int row, int move)
 	{
 		boolean yes = true;
@@ -262,6 +275,12 @@ public class Board {
 		return yes;
 	}
 
+	/**
+	 * added method to make sure the player cannot get stuck in a loop where they cannot move once they choose a place to move from.
+	 * @param location
+	 * @param dc
+	 * @return if player 1 can move
+	 */
 	public boolean p1canMove(int location, DiceCup dc)
 	{
 		boolean p1canMove = true;
@@ -271,16 +290,21 @@ public class Board {
 		for (int i = 0; i < 4; i++)
 		{
 			check = location + dc.getDie()[i];
-			if (i<3)
-				checkUp = location + dc.getDie()[i+1];
+			if (i<3) {
+				checkUp = location + dc.getDie()[i + 1];
+				if (checkUp>25)
+					checkUp=25;
+			}
+
 			if (i>0)
 			{
 				checkDown = location + dc.getDie()[i - 1];
-				if (checkDown < 0)
+				if (checkDown > 25)
 					checkDown = 0;
 			}
 			if (check<0)
 				check = 0;
+
 			if (numberOfPieces[check] < -1)
 				if (numberOfPieces[checkUp] < -1 || numberOfPieces[checkDown] < -1)
 				{
@@ -290,6 +314,12 @@ public class Board {
 		return p1canMove;
 	}
 
+	/**
+	 * method to make sure the player cannot get stuck in a loop where they cannot move once they choose a place to move from.
+	 * @param location
+	 * @param dc
+	 * @return if player 2 can move
+	 */
 	public boolean p2canMove(int location, DiceCup dc)
 	{
 		boolean p2canMove = true;
