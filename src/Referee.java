@@ -6,7 +6,6 @@ import java.util.Scanner;
  */
 public class Referee {
 
-	// TODO: decide which private member variables the Referee should have and declare them here.
 	// suggestion: the dice are an array of integers, typically 1-6, where 0 means unrolled or 
 	// used up already.
 	private Scanner keyReader = new Scanner(System.in);
@@ -23,41 +22,40 @@ public class Referee {
 	private boolean p2FirstTurn = false;
 
 	/**
-	 * constructor - set up the board and players 
-	 */
-	// TODO: you write the Referee's constructor
-
-	/**
 	 * playGame - the main game loop. Roll the dice, ask the user for a
 	 * move, determine whether it is legal, and then execute the move.
 	 * Repeat for any remaining dice.
 	 */
 	public void playGame() {
-		// TODO: you write the Referee's playGame method.
 		// starting turn
 		myBoard = new Board();
 		dCup = new DiceCup();
 		System.out.println("Welcome to Backgammon!");
 		System.out.println("\t**RULES**");
-		System.out.println("1. Move your pieces to your bar\n" +
-				"2. You must have all of your pieces within the closest six spots to your end to begin taking them off the board\n" +
-				"3. If you have one piece on a spot it can be taken which will move it back to the opposite bar");
+		System.out.println("1. The goal of the game is to move your pieces to your appropriate bar\n" +
+				"2. Every turn, a player rolls two dice which represent each of their available moves.\n" +
+				"3. If a player rolls two of the same number, they get four identical moves\n" +
+				"4. O's represent player 1 pieces and X's represent player 2 pieces\n" +
+				"5. You must have all of your pieces within the closest six spots to your end to begin taking them off the board\n" +
+				"6. If you have one piece on a spot it can be taken which will move it back to the opposite bar");
 		System.out.print("Player 1 name: ");
 		p1name = keyReader.nextLine();
 		System.out.print("Player 2 name: ");
 		p2name = keyReader.nextLine();
 		//start game
-		while (gameIsStillPlaying) {
+		while (gameIsStillPlaying)
+		{
 			p1Turn = true;
 			// player 1 turn
-			while (p1Turn) {
+			while (p1Turn)
+			{
 				// if first turn then roll dice an print board
-				if (p1FirstTurn) {
+				if (p1FirstTurn)
+				{
 					System.out.println(myBoard);
 					dCup.roll();
 					System.out.println(p1name + " is rolling...");
 					System.out.println(dCup);
-					System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
 					p1FirstTurn = false;
 					p2FirstTurn = true;
 				}
@@ -72,7 +70,8 @@ public class Referee {
 				System.out.println(p1name+", From which row would you like to move a piece?");
 				p1row = keyReader.nextInt();
 				// if invalid choice
-				while (!myBoard.playerHasPieceAtLocation(1, p1row)|| p1row > 25 || p1row <0) {
+				while (!myBoard.playerHasPieceAtLocation(1, p1row)|| p1row > 25 || p1row <0)
+				{
 					System.out.println("Please enter a valid number");
 					System.out.println(p1name+", From which row would you like to move a piece?");
 					p1row = keyReader.nextInt();
@@ -85,19 +84,21 @@ public class Referee {
 					p1row = keyReader.nextInt();
 				}
 				// if valid choice
-				if (myBoard.playerHasPieceAtLocation(1, p1row)) {
+				if (myBoard.playerHasPieceAtLocation(1, p1row))
+				{
 					// if hasMovesLeft = 0
 					if (!p1Turn)
 						break;
 					// if hasMovesLeft > 0
-					while (dCup.hasMovesLeft()) {
+					while (dCup.hasMovesLeft())
+					{
 						// print moves and ask which move
 						dCup.options();
 						int choice = keyReader.nextInt();
 						// check if move goes off the board and if they are allowed to go off
-						if (!myBoard.p1CanMoveOffBoard(p1row,choice))
+						if (!myBoard.isLegal(p1row,choice))
 						{
-							System.out.println("You cannot move off the board yet");
+							System.out.println("Sorry "+p1name+", that move is invalid. Please select another row.");
 							break;
 						}
 						// if move can be made
@@ -118,7 +119,6 @@ public class Referee {
 								else
 								{
 									System.out.println(dCup);
-									System.out.println(p1name + " is: O's\t" + p2name + " is: X's");
 								}
 								break;
 							}
@@ -127,14 +127,15 @@ public class Referee {
 				}
 			}
 			// p2 turn
-			while (p2Turn) {
+			while (p2Turn)
+			{
 				// if p2 first turn roll dice
-				if (p2FirstTurn) {
+				if (p2FirstTurn)
+				{
 					System.out.println(myBoard);
 					dCup.roll();
 					System.out.println(p2name + " is rolling...");
 					System.out.println(dCup);
-					System.out.println(p1name+" is: O's\t"+p2name+" is: X's");
 					p2FirstTurn = false;
 					p1FirstTurn = true;
 				}
@@ -148,7 +149,8 @@ public class Referee {
 				System.out.println(p2name+", From which row would you like to move a piece?");
 				p2row = keyReader.nextInt();
 				// if invalid choice
-				while (!myBoard.playerHasPieceAtLocation(-1, p2row)|| p2row > 25 || p2row <0) {
+				while (!myBoard.playerHasPieceAtLocation(-1, p2row)|| p2row > 25 || p2row <0)
+				{
 					System.out.println("Please enter a valid number");
 					System.out.println(p2name+", From which row would you like to move a piece?");
 					p2row = keyReader.nextInt();
@@ -161,23 +163,26 @@ public class Referee {
 					p2row = keyReader.nextInt();
 				}
 				//if valid choice
-				if (myBoard.playerHasPieceAtLocation(-1, p2row)) {
+				if (myBoard.playerHasPieceAtLocation(-1, p2row))
+				{
 					// if hasMovesLeft = 0
 					if (!p2Turn)
 						break;
 					// if hasMovesLeft > 0
 					// if no moves left
-					while (dCup.hasMovesLeft()) {
+					while (dCup.hasMovesLeft())
+					{
 						dCup.options();
 						int choice = keyReader.nextInt();
 						// check if move goes off the board and if they are allowed to go off
-						if (!myBoard.p2CanMoveOffBoard(p2row,choice))
+						if (!myBoard.isLegal(p2row,choice))
 						{
-							System.out.println("You cannot move off the board yet");
+							System.out.println("Sorry "+p2name+", that move is invalid. Please select another row.");
 							break;
 						}
 						// print moves and ask which move
-						if (dCup.isLegal(choice)) {
+						if (dCup.isLegal(choice))
+						{
 							if (myBoard.isLegal(p2row, choice))
 							{
 								// make move, print board, print player's pieces
@@ -192,7 +197,6 @@ public class Referee {
 								else
 									{
 									System.out.println(dCup);
-									System.out.println(p1name + " is: O's\t" + p2name + " is: X's");
 								}
 								break;
 							}

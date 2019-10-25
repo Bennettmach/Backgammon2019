@@ -5,7 +5,6 @@
  */
 public class Board {
 
-	// TODO: decide which private member variables the Board class needs, and declare them here.
 	private int[] numberOfPieces =  new int[26];
 
 	// suggestion - for the 24 spaces, I suggest an array that holds the number
@@ -240,42 +239,6 @@ public class Board {
 	}
 
 	/**
-	 * method added to make the game more like the real game where you have to have all 15 pieces in your score zone to take them off
-	 * @param row
-	 * @param move
-	 * @return if player 1 can move off the board
-	 */
-	public boolean p1CanMoveOffBoard(int row, int move)
-	{
-		boolean yes = true;
-		if (row + move < 1)
-			for (int i = 6;i<numberOfPieces.length;i++)
-				if (numberOfPieces[i] > 0)
-				{
-					yes = false;
-				}
-		return yes;
-	}
-
-	/**
-	 * added to make the game more like the real game where you have to have all 15 pieces in your score zone to take them off
-	 * @param row
-	 * @param move
-	 * @return if player 2 can move off the board
-	 */
-	public boolean p2CanMoveOffBoard(int row, int move)
-	{
-		boolean yes = true;
-		if (row - move >24)
-			for (int i = 18;i>0;i--)
-				if (numberOfPieces[i] < 0)
-				{
-					yes = false;
-				}
-		return yes;
-	}
-
-	/**
 	 * added method to make sure the player cannot get stuck in a loop where they cannot move once they choose a place to move from.
 	 * @param location
 	 * @param dc
@@ -290,26 +253,35 @@ public class Board {
 		for (int i = 0; i < 4; i++)
 		{
 			check = location + dc.getDie()[i];
-			if (i<3) {
+			if (i<3)
+			{
 				checkUp = location + dc.getDie()[i + 1];
 				if (checkUp>25)
+				{
 					checkUp=25;
+				}
 			}
 
 			if (i>0)
 			{
 				checkDown = location + dc.getDie()[i - 1];
 				if (checkDown > 25)
+				{
 					checkDown = 0;
+				}
 			}
 			if (check<0)
+			{
 				check = 0;
+			}
 
 			if (numberOfPieces[check] < -1)
+			{
 				if (numberOfPieces[checkUp] < -1 || numberOfPieces[checkDown] < -1)
 				{
 					p1canMove = false;
 				}
+			}
 		}
 		return p1canMove;
 	}
@@ -330,7 +302,9 @@ public class Board {
 		{
 			check = location - dc.getDie()[i];
 			if (i<3)
+			{
 				checkUp = location - dc.getDie()[i+1];
+			}
 			if (i>0)
 			{
 				checkDown = location - dc.getDie()[i - 1];
@@ -338,7 +312,9 @@ public class Board {
 					checkDown = 0;
 			}
 			if (check<0)
+			{
 				check = 0;
+			}
 			if (numberOfPieces[check] > 1)
 				if (numberOfPieces[checkUp] > 1 || numberOfPieces[checkDown] > 1)
 				{
@@ -362,14 +338,15 @@ public class Board {
 		for (int i = 0; i < 26; i++)
 		{
 			if (numberOfPieces[i] > 0)
+			{
 				p1HasPieces=true;
+			}
 			if (numberOfPieces[i] < 0)
+			{
 				p2HasPieces=true;
+			}
 		}
-		if (p1HasPieces && p2HasPieces)
-			gameOver = false;
-		else
-			gameOver = true;
+		gameOver = !p1HasPieces || !p2HasPieces;
 		//--------------------
 		return gameOver;
 	}

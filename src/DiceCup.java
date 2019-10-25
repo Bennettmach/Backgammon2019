@@ -7,14 +7,17 @@ import java.util.ArrayList;
  *
  */
 public class DiceCup {
+
 	private int die1, die2;
-	private int[] availableMoves = new int[4]; // this will be four numbers, though positions
-								 //     2 and 3 will often be zero.
+	private int[] availableMoves = new int[4];
+	// this will be four numbers, though positions
+	// 2 and 3 will often be zero.
 	
 	public DiceCup()
 	{
 		//--------------------
 		// TODO: insert your code here.
+		//The game should work without this method
 		//--------------------
 	}
 	/**
@@ -30,7 +33,6 @@ public class DiceCup {
 	public void calculateAvailableMoves()
 	{
 		//--------------------
-		// TODO: insert your code here.
 		if (isDoubles())
 		{
 			availableMoves[0]=die1;
@@ -45,7 +47,6 @@ public class DiceCup {
 			availableMoves[2]=0;
 			availableMoves[3]=0;
 		}
-
 		//--------------------
 	}
 	/**
@@ -57,7 +58,6 @@ public class DiceCup {
 	public void roll()
 	{
 		//--------------------
-		// TODO: insert your code here.
 		// Hint: (int)(Math.random()*10) gives a random number from 0 to 9, inclusive.
 		// Hint: write calculateAvailableMoves() before you write this one.
 		die1=(int)(Math.random()*6+1);
@@ -96,7 +96,6 @@ public class DiceCup {
 	{
 		String result = "+-+ +-+\n|"+die1+"| |"+die2+"| \n";
 		//--------------------
-		// TODO: insert your code here.
 		result = result + "+-+ +-+\n";
 		if (isDoubles())
 		{
@@ -123,14 +122,14 @@ public class DiceCup {
 	{
 		boolean legal = false;
 		//--------------------
-		// TODO: insert your code here.
-		for (int i = 0;i < availableMoves.length;i++)
+		for (int availableMove : availableMoves)
 		{
-			if (amountToMove == availableMoves[i])
+			if (amountToMove == availableMove)
 			{
 				if (amountToMove == 0)
+				{
 					return legal;
-				else
+				} else
 					legal = true;
 			}
 		}
@@ -145,7 +144,6 @@ public class DiceCup {
 	{
 		boolean doubles = false;
 		//--------------------
-		// TODO: insert your code here.
 		if (die1==die2)
 		{
 			doubles = true;
@@ -163,8 +161,7 @@ public class DiceCup {
 	public void moveMade(int amountToMove)
 	{
 		//--------------------
-		// TODO: insert your code here.
-		for (int i = 0;i<=3;i++)
+		for (int i = 3;i>=0;i--)
 		{
 			if (availableMoves[i] == amountToMove)
 			{
@@ -185,12 +182,11 @@ public class DiceCup {
 	{
 		boolean hasMoves = false;
 		//--------------------
-		// TODO: insert your code here.
-		for (int i = 0; i<availableMoves.length; i++)
+		for (int availableMove : availableMoves)
 		{
-			if (availableMoves[i]>0)
+			if (availableMove > 0)
 			{
-				hasMoves=true;
+				hasMoves = true;
 				break;
 			}
 		}
